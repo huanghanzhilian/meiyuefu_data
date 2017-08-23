@@ -1,0 +1,146 @@
+<link rel="stylesheet" href="company-detail.less?__inline">
+
+
+
+<div class="block clearfix col-md-12" ng-if="queryParams.type=='show'&&loading">
+    <form name="searchForm" novalidate>
+
+        <div class="tab-title">公司基本信息</div>
+
+        <table class="table table-style-1">
+            <tbody>
+            <tr>
+                <td class="name-f">公司名称</td>
+                <td class="name-v">
+                    {{orders.company.companyName}}
+                </td>
+                <td class="name-f">公司简称</td>
+                <td class="name-v">
+                    {{orders.company.briefName}}
+                </td>
+                <td class="name-f">所在省-市</td>
+                <td class="name-v">
+                    {{orders.companyMore.province}} - {{orders.companyMore.city}}
+                </td>
+                
+            </tr>
+            <tr>
+                <td class="name-f">法人姓名</td>
+                <td class="name-v">
+                    {{orders.company.legalPersonName}}
+                </td>
+                <td class="name-f">法人身份证号</td>
+                <td class="name-v">
+                    {{orders.companyMore.legalPersonIdCard}}
+                </td>
+                <td class="name-f">法人联系方式</td>
+                <td class="name-v">
+                    {{orders.companyMore.legalPersonPhone}}
+                </td>
+                
+            </tr>
+        <tr>
+        </tr>
+            
+            </tbody>
+        </table>
+
+        <div class="tab-title">合作信息</div>
+        <table class="table table-style-1">
+            <tbody>
+            <tr>
+                <td class="name-f">合作期起</td>
+                <td class="name-v">
+                    {{orders.companyMore.cooperationStart}}
+                </td>
+                <td class="name-f">合作期止</td>
+                <td class="name-v">
+                    {{orders.companyMore.cooperationEnd}}
+                </td>
+
+                
+            </tr>
+           
+            </tbody>
+        </table>
+        
+        
+    </form>
+</div>
+
+
+
+<div class="block clearfix col-md-12 edit" ng-if="queryParams.type=='add'||(queryParams.type=='edit'&&loading)">
+<form name="searchForm" ng-submit="save($event)">
+    <div class="pos-rb">
+        <div class="list-filter-col">
+            <button class="btn btn-primary" type="submit" ng-if="queryParams.type=='add'">新增</button>
+            <button class="btn btn-primary" type="submit" ng-if="queryParams.type=='edit'">保存</button>
+        </div>
+    </div>
+    <div class="tab-title">公司基本信息</div>
+
+    <table class="table table-style-1">
+        <tbody>
+        <tr>
+
+            <td class="name-f">公司名称<span class="red">*</span></td>
+            <td class="name-v">
+                <input type="text" class="form-control" ng-model="orders.company.companyName" style="width: 90%;" jr-placeholder="" required/>
+            </td>
+            <td class="name-f">公司简称<span class="red">*</span></td>
+            <td class="name-v">
+                <input type="text" class="form-control" ng-model="orders.company.briefName" jr-placeholder="" required/>
+            </td>
+            <td class="name-f">所在省/市<span class="red">*</span></td>
+            <td class="name-v" colspan="3">
+                <jr-dropdown-button id="companyProvinceCode" options="queryOptions.companyProvinceCode" value="orders.companyMore.companyProvinceCode"></jr-dropdown-button>
+                <jr-dropdown-button id="companyCityCode" options="queryOptions.companyCityCode" value="orders.companyMore.companyCityCode"></jr-dropdown-button>
+
+            </td>
+
+        </tr>
+        <tr>
+            <td class="name-f">法人姓名<span class="red">*</span></td>
+            <td class="name-v">
+                <input type="text" class="form-control" ng-model="orders.company.legalPersonName" style="width: 90%;" jr-placeholder="" required/>
+
+            </td>
+            <td class="name-f">法人身份证号<span class="red">*</span></td>
+            <td class="name-v">
+                <input type="text" class="form-control" style="width: 150px;" ng-model="orders.companyMore.legalPersonIdCard" jr-placeholder="" required/>
+
+            </td>
+            <td class="name-f">法人联系方式<span class="red">*</span></td>
+            <td class="name-v">
+                <input type="text" class="form-control" ng-model="orders.companyMore.legalPersonPhone" jr-placeholder="" required/>
+
+            </td>
+           
+        </tr>
+        
+        </tbody>
+    </table>
+
+    <div class="tab-title">合作信息</div>
+    <table class="table table-style-1">
+        <tbody>
+        <tr>
+            <td class="name-f">合作期起<span class="red">*</span></td>
+            <td class="name-v">
+                <jr-datepicker placeholder="合作期起"  time="orders.companyMore.cooperationStart"></jr-datepicker>
+            </td>
+            <td class="name-f">合作期止<span class="red">*</span></td>
+            <td class="name-v">
+                <jr-datepicker placeholder="合作期止"  time="orders.companyMore.cooperationEnd"></jr-datepicker>
+            </td>
+            
+        </tr>
+        
+
+        </tbody>
+    </table>
+    
+    
+</form>
+</div>

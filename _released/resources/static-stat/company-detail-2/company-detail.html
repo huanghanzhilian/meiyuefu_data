@@ -1,0 +1,146 @@
+<style>.tab-title{height:40px;line-height:40px;color:#636e97;font-size:14px}.table-style-1{border:1px solid #dfdfdf;box-shadow:none}.table-style-1>tbody>tr:nth-child(odd)>td{background-color:#fff}.table-style-1>tbody>tr:nth-child(even)>td{background-color:#fff}.table-style-1>tbody>tr>td.name-f{background-color:#F9FAFD}.table-style-1>tbody>tr>td.name-f{text-align:center;color:#636e97;border-right:1px solid #E5ECF5}.table-style-1>tbody>tr>td.name-v{text-align:left}.table .active{background-color:#FF0!important}.table .active td{background-color:#FF0!important}.form-control{margin:0}.edit{margin-bottom:100px}.edit .table-style-1>tbody>tr>td.name-v{overflow:visible;padding:0;padding-left:10px}.ui-suggestion{position:relative;width:auto}.ui-suggestion .dropdown-tooltip{position:absolute;top:100%;left:-1px;z-index:1000;float:left;min-width:160px;font-size:14px;text-align:left;-webkit-box-shadow:0 6px 12px rgba(0,0,0,.175);box-shadow:0 6px 12px rgba(0,0,0,.175)}.ui-suggestion .dropdown-tooltip ul{list-style:none;background:none repeat scroll 0 0 #fff;border:1px solid #B9CBE1;display:block;margin:0;min-height:10px;padding:0;position:relative;z-index:100}.ui-suggestion .dropdown-tooltip ul li{color:#333;cursor:pointer;display:block;font-size:14px;height:30px;line-height:30px;text-decoration:none;text-indent:7px;overflow:hidden;white-space:nowrap}.ui-suggestion .dropdown-tooltip ul li cite{color:#999;font-size:12px;font-style:normal;font-weight:400;padding-left:10px}.ui-suggestion .dropdown-tooltip ul li:hover{background:#f0f0f0}.ui-suggestion.ui-hover{border:1px solid #8ABCF9}.ui-suggestion.ui-error{border:1px solid #fd634f}.red{color:#ff2020}</style>
+
+
+
+<div class="block clearfix col-md-12" ng-if="queryParams.type=='show'&&loading">
+    <form name="searchForm" novalidate>
+
+        <div class="tab-title">公司基本信息</div>
+
+        <table class="table table-style-1">
+            <tbody>
+            <tr>
+                <td class="name-f">公司名称</td>
+                <td class="name-v">
+                    {{orders.company.companyName}}
+                </td>
+                <td class="name-f">公司简称</td>
+                <td class="name-v">
+                    {{orders.company.briefName}}
+                </td>
+                <td class="name-f">所在省-市</td>
+                <td class="name-v">
+                    {{orders.companyMore.province}} - {{orders.companyMore.city}}
+                </td>
+                
+            </tr>
+            <tr>
+                <td class="name-f">法人姓名</td>
+                <td class="name-v">
+                    {{orders.company.legalPersonName}}
+                </td>
+                <td class="name-f">法人身份证号</td>
+                <td class="name-v">
+                    {{orders.companyMore.legalPersonIdCard}}
+                </td>
+                <td class="name-f">法人联系方式</td>
+                <td class="name-v">
+                    {{orders.companyMore.legalPersonPhone}}
+                </td>
+                
+            </tr>
+        <tr>
+        </tr>
+            
+            </tbody>
+        </table>
+
+        <div class="tab-title">合作信息</div>
+        <table class="table table-style-1">
+            <tbody>
+            <tr>
+                <td class="name-f">合作期起</td>
+                <td class="name-v">
+                    {{orders.companyMore.cooperationStart}}
+                </td>
+                <td class="name-f">合作期止</td>
+                <td class="name-v">
+                    {{orders.companyMore.cooperationEnd}}
+                </td>
+
+                
+            </tr>
+           
+            </tbody>
+        </table>
+        
+        
+    </form>
+</div>
+
+
+
+<div class="block clearfix col-md-12 edit" ng-if="queryParams.type=='add'||(queryParams.type=='edit'&&loading)">
+<form name="searchForm" ng-submit="save($event)">
+    <div class="pos-rb">
+        <div class="list-filter-col">
+            <button class="btn btn-primary" type="submit" ng-if="queryParams.type=='add'">新增</button>
+            <button class="btn btn-primary" type="submit" ng-if="queryParams.type=='edit'">保存</button>
+        </div>
+    </div>
+    <div class="tab-title">公司基本信息</div>
+
+    <table class="table table-style-1">
+        <tbody>
+        <tr>
+
+            <td class="name-f">公司名称<span class="red">*</span></td>
+            <td class="name-v">
+                <input type="text" class="form-control" ng-model="orders.company.companyName" style="width: 90%;" jr-placeholder="" required/>
+            </td>
+            <td class="name-f">公司简称<span class="red">*</span></td>
+            <td class="name-v">
+                <input type="text" class="form-control" ng-model="orders.company.briefName" jr-placeholder="" required/>
+            </td>
+            <td class="name-f">所在省/市<span class="red">*</span></td>
+            <td class="name-v" colspan="3">
+                <jr-dropdown-button id="companyProvinceCode" options="queryOptions.companyProvinceCode" value="orders.companyMore.companyProvinceCode"></jr-dropdown-button>
+                <jr-dropdown-button id="companyCityCode" options="queryOptions.companyCityCode" value="orders.companyMore.companyCityCode"></jr-dropdown-button>
+
+            </td>
+
+        </tr>
+        <tr>
+            <td class="name-f">法人姓名<span class="red">*</span></td>
+            <td class="name-v">
+                <input type="text" class="form-control" ng-model="orders.company.legalPersonName" style="width: 90%;" jr-placeholder="" required/>
+
+            </td>
+            <td class="name-f">法人身份证号<span class="red">*</span></td>
+            <td class="name-v">
+                <input type="text" class="form-control" style="width: 150px;" ng-model="orders.companyMore.legalPersonIdCard" jr-placeholder="" required/>
+
+            </td>
+            <td class="name-f">法人联系方式<span class="red">*</span></td>
+            <td class="name-v">
+                <input type="text" class="form-control" ng-model="orders.companyMore.legalPersonPhone" jr-placeholder="" required/>
+
+            </td>
+           
+        </tr>
+        
+        </tbody>
+    </table>
+
+    <div class="tab-title">合作信息</div>
+    <table class="table table-style-1">
+        <tbody>
+        <tr>
+            <td class="name-f">合作期起<span class="red">*</span></td>
+            <td class="name-v">
+                <jr-datepicker placeholder="合作期起"  time="orders.companyMore.cooperationStart"></jr-datepicker>
+            </td>
+            <td class="name-f">合作期止<span class="red">*</span></td>
+            <td class="name-v">
+                <jr-datepicker placeholder="合作期止"  time="orders.companyMore.cooperationEnd"></jr-datepicker>
+            </td>
+            
+        </tr>
+        
+
+        </tbody>
+    </table>
+    
+    
+</form>
+</div>

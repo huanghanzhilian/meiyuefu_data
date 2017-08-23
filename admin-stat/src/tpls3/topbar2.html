@@ -1,0 +1,56 @@
+<li class="expand">
+    <a ng-show="canAccess(',company,')" class="dpdtoggle" href="#/user?type=1">
+        <i class="small-icon icon-user"></i>合作伙伴管理<i class="arrow"></i>
+    </a>
+
+    <ul class="submenu">
+        <li ng-if="canAccess(',company,')" ng-class="{active: $state.includes('index.systemTow.company')}" >
+            <a href="#/index/systemTow/company">合作伙伴详情</a>
+        </li>
+    </ul>
+</li>
+
+<li class="expand">
+    <a ng-show="canAccess(',user,') || canAccess(',user/normal,') || canAccess(',user/overdue,') || canAccess(',user/clean,')" class="dpdtoggle" href="#/user?type=1">
+        <i class="small-icon icon-agent"></i>公寓风险<i class="arrow"></i>
+    </a>
+
+    <ul class="submenu">
+        <li ng-if="canAccess(',OutlierDetection,')" ng-class="{active: $state.includes('index.systemTow.OutlierDetection')}" >
+            <a href="#/index/systemTow/OutlierDetection">离群监测图</a>
+        </li>
+
+        <li ng-if="canAccess(',Riskmigration,')" ng-class="{active: $state.includes('index.systemTow.Riskmigration')}" >
+            <a href="#/index/systemTow/Riskmigration">风险迁徙图</a>
+        </li>
+        <li ng-if="canAccess(',RelationalAnomaly,')" ng-class="{active: $state.includes('index.systemTow.RelationalAnomaly')}" >
+            <a href="#/index/systemTow/RelationalAnomaly">关系异常图</a>
+        </li>
+    </ul>
+</li>
+
+<div class="header-info">
+    <a href="javascript:;" class="user-name" ng-click="modifyPassword($event)"><span></span>修改密码</a>
+    <a href="/manage/public/view/get/logout" class="logout"><span></span>退出</a>
+</div>
+
+
+<script type="text/javascript">
+    $('a.dpdtoggle', $('#side')).click(function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        
+        var parent = $(this).parent();
+        var submenu = $('>ul.submenu', parent);
+        if(submenu.is(":visible")){
+            submenu.slideUp('fast', function(){
+                parent.removeClass('expand');
+            });
+            
+        } else {
+            submenu.slideDown('fast', function(){
+                parent.addClass('expand');
+            });
+        }
+    });
+</script>

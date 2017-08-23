@@ -1,0 +1,28 @@
+
+
+
+<div class="body">
+	<div class="g-sd1">
+       <div class="toplogo">
+           <a href="javascript:void(0);" target="_blank" title="月付后台-{{userInfo.companyName}}"id="top-logo">
+               <img ng-src="{{userInfo.companyLogo||'/static-stat/_common/nimg/logo-w.png?14991685'}}" class="logo" alt="logo"  />
+               <div class="logo-txt">运营系统</div>
+           </a>
+       </div>
+       <div class="system_witch">
+		<a ng-class="{active: $state.includes('**.systemOne.**')}" href="#index/systemOne/welcome">放 贷</a>
+		<a ng-class="{active: $state.includes('**.systemTow.**')}" href="#index/systemTow/welcome">收 租</a>
+		</div>
+
+	    <ul ui-view="topbar" class="side " id="side">
+	    </ul>
+
+
+	</div>
+	<div class="g-mn1">
+	    <div class="g-mn1c" ui-view="main">
+
+	    </div>
+	</div>
+	<div class="loading" ng-if="loading">loading……</div>
+</div>
